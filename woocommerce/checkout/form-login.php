@@ -23,17 +23,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_login_reminder' ) ) {
 	return;
 }
-
+// Login Box on checkout page
 $info_message  = apply_filters( 'woocommerce_checkout_login_message', __( 'Returning customer?', 'woocommerce' ) );
 $info_message .= ' <a href="#" class="showlogin">' . __( 'Click here to login', 'woocommerce' ) . '</a>';
 wc_print_notice( $info_message, 'notice' );
 
+
 woocommerce_login_form(
 	array(
-		'message'  => __( 'If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.', 'woocommerce' ),
+		'message'  => __( 'If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the My Account Section.', 'woocommerce' ),
 		'redirect' => wc_get_page_permalink( 'checkout' ),
 		'hidden'   => true,
 	)
 );
+
+// Registration Box on checkout page
+?>
+<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" title="<?php _e('New Member?','woothemes'); ?>"><?php _e('New Member?','woothemes'); ?></a>
+
+<?php
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
